@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<title>Mercy</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"> </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript-canvas-to-blob/2.2.0/js/canvas-to-blob.min.js"> </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.min.js"></script>
+    		<link rel="stylesheet" type="text/css" href="./demo.css" />
+		   </head>
+	<body>
+		<div class="container">
+			<div class="content" style="padding:15px;">
+				<div class="component">
+					<div class="overlay">
+						<div class="overlay-inner">
+						</div>
+					</div>
+					<!-- This image must be on the same domain as the demo or it will not work on a local file system -->
+					<!-- http://en.wikipedia.org/wiki/Cross-origin_resource_sharing -->
+					<img class="resize-image" id="upload" src="" alt="image for resizing">
+                    <input class="btn-crop" style="width:200px;right:70%;" type="file" onchange="previewFile()" id="imageLoader" name="imageLoader"/>
+                    <button class="btn-crop js-crop">Crop<img class="icon-crop" src="https://cloud.githubusercontent.com/assets/4099066/11014718/a771b11e-8569-11e5-86a5-7741ec02187c.png"></button>
+				</div>
+				<div class="a-tip">
+					<p style="margin-top: 5px; margin-bottom: 5px;"
+><strong>Hint:</strong> hold <span style="color:blue;">SHIFT</span> while resizing to keep the original aspect ratio.</p>
+				</div>
+                <canvas id="canvas2" width="850" height="315" style="border:1px solid #d3d3d3;">
+             </div><!-- /content -->
+                 <button style="left:80%" class="btn-crop js-down">Download<img class="icon-crop" src="https://cloud.githubusercontent.com/assets/4099066/11014719/a7c5111a-8569-11e5-91ef-c93d11f9227a.png" height="4%" width="14px"></button>
+                <div id="temp" style="display:none;"></div>
+			<!-- Related demos -->
+		</div> <!-- /container -->
+                <script src="https://code.jquery.com/jquery-2.1.4.min.js"> </script>
+		<script src="./component.js"></script>
+	</body>
+</html>
