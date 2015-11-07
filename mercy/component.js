@@ -210,7 +210,7 @@ function previewFile() {
         
     var base_image = new Image();
     base_image.crossOrigin="anonymous";
-    base_image.src = 'https://cloud.githubusercontent.com/assets/4099066/11014688/a7f4d924-8567-11e5-9a4e-f561a911de36.png';
+    base_image.src = 'http://jyteenstcr.com/mercy/img/base.png';
   
     base_image.onload=function(){
          ctx.drawImage(base_image,0,0);
