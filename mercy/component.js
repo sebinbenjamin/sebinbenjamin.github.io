@@ -45,7 +45,9 @@ function previewFile() {
     $container.on('mousedown touchstart', '.resize-handle', startResize);
     $container.on('mousedown touchstart', 'img', startMoving);
     $('.js-crop').on('click', crop);
-    $('.js-down').on('click', down);  
+    $('.js-down').on('click', down); 
+    $('.js-fbcover').on('click', fbcover); 
+        
   };
 
   startResize = function(e){
@@ -209,8 +211,8 @@ function previewFile() {
     img.src=(crop_canvas.toDataURL("image/png"));
         
     var base_image = new Image();
-    base_image.crossOrigin="anonymous";
-    base_image.src = 'http://jyteenstcr.com/mercy/img/base.png';
+    img.crossOrigin = "Anonymous";
+    base_image.src = './img/base.png';
   
     base_image.onload=function(){
          ctx.drawImage(base_image,0,0);
@@ -225,7 +227,26 @@ function previewFile() {
           saveAs(blob, "mercy_cover.png");
       });
   };
-    
+  fbcover = function(){  
+   //http://www.facebook.com/profile.php?preview_cover=
+       var imgURL = "http://farm4.staticflickr.com/3332/3451193407_b7f047f4b4_o.jpg";
+       FB.api('/photos', 'POST', {
+                message: 'testing Graph API',
+                access_token:  accessToken, 
+                url: imgURL,
+                no_story:true
+            }, function (response) {
+            if (!response || response.error) {
+                alert('Error occured:' + response);
+            } else {
+                alert('Post ID: ' + response.id);
+            }
+            }
+        );
+      alert("Coming soon !");  
+      
+  };
+      
 init();
 };
 // Kick everything off with the target image
