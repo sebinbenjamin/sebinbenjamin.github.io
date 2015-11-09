@@ -40,14 +40,14 @@
         "/me/feed",
         "POST",
         {
-            "message": "Hello World!.....Testing Graph API !!!"
+            "message": "Testing Graph API"
         },
         function (response) {
           if (response && !response.error) {
             alert("Hello World!");
           }
           else {
-            console.log('Error occured');
+            console.log('Error occured'+response.error);
           }
         }
     );
