@@ -18,7 +18,25 @@
         FB.api('/me?fields=first_name', function(data) {
           var welcomeBlock = document.getElementById('fb-welcome');
           welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
-        });
+          });
+
+          accessToken = response.authResponse.accessToken;
+          uid = response.authResponse.userID;
+          FB.api(
+              "/me/feed",
+              "POST",
+              {
+                  "message": "Testing Graph API", access_token: 'accessToken'
+              },
+              function (response) {
+                if (response && !response.error) {
+                  alert("Hello World!");
+                }
+                else {
+                  console.log('Error occured: '+response.error.message+' Type:'+response.error.type+' Code: '+response.error.code);
+                }
+              }
+          );
       }
     };
 
@@ -26,8 +44,6 @@
       // Check login status on load, and if the user is
       // already logged in, go directly to the welcome message.
       if (response.status == 'connected') {
-        accessToken = response.authResponse.accessToken;
-        uid = response.authResponse.userID;
         onLogin(response);
       } else {
         // Otherwise, show Login dialog first.
@@ -36,21 +52,7 @@
         }, {scope: 'user_friends, email, publish_actions'});
       }
     });
-    FB.api(
-        "/me/feed",
-        "POST",
-        {
-            "message": "Testing Graph API", access_token: 'accessToken'
-        },
-        function (response) {
-          if (response && !response.error) {
-            alert("Hello World!");
-          }
-          else {
-            console.log('Error occured '+response.error.message+' Type:'+response.error.type+' Code: '+response.error.code);
-          }
-        }
-    );
+
     //additional code ends here
 
   };
