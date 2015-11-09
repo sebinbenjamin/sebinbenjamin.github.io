@@ -8,16 +8,89 @@
     		<link rel="stylesheet" type="text/css" href="./demo.css" />
 		   </head>
 	<body>
+		<script>
+		    window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '1516759218643123',
+              xfbml      : true,
+              version    : 'v2.5'
+            });
+
+            
+                
+              FB.getLoginStatus(function(response) {
+              // Check login status on load, and if the user is
+              // already logged in, go directly to the welcome message.
+              if (response.status == 'connected') {  
+                console.log("logged in & authenticated")
+                onLogin(response);
+                uid = response.authResponse.userID;  
+                accessToken = response.authResponse.accessToken;
+              } 
+              else if (response.status === 'not_authorized') {
+                console.log("logged in but not authenticated !")
+              }
+              else {
+                  console.log("Not logged in !")
+                  // Otherwise, show Login dialog first.
+                  alert("Please allow the blocked popup/page redirect");
+                  $( "#fbtemp" ).click();
+              }
+		  });
+
+            
+            function onLogin(response) {
+              if (response.status == 'connected') {
+                FB.api('/me?fields=first_name', function(data) {
+                  var welcomeBlock = document.getElementById('fb-welcome');
+                  welcomeBlock.innerHTML = 'Hello, ' + data.first_name +' '+'!';
+                });
+              }
+            }     
+                
+                
+                
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+            
+            function fbLogin()
+            {  
+               event.preventDefault();
+               FB.login(function(response) {
+                        if (response.authResponse) {
+                         console.log('Welcome!  Fetching your information.... ');
+                         } else {
+                         console.log('User cancelled login or did not fully authorize.');
+                        }
+                    });
+            }
+		</script>
 		<div class="container">
 			<div class="content" style="padding:15px;">
 				<div class="component">
-					<div class="overlay">
+                    
+                    <!-- Welcome in facebook -->
+                    <div>
+                        <h1 id="fb-welcome" style="float:left;"></h1>
+				    </div>
+                    <div     style="clear: both; float: left;"
+                      class="fb-like"
+                      data-share="true"
+                      data-width="450"
+                      data-show-faces="true">
+                    </div>      
+                    <div class="overlay">
 						<div class="overlay-inner">
 						</div>
 					</div>
-					<!-- This image must be on the same domain as the demo or it will not work on a local file system -->
-					<!-- http://en.wikipedia.org/wiki/Cross-origin_resource_sharing -->
-					<img class="resize-image" id="upload" src="" alt="image for resizing">
+						<img class="resize-image" id="upload" src="" alt="click on 'choose file'">
                     <input class="btn-crop" style="width:200px;right:70%;" type="file" onchange="previewFile()" id="imageLoader" name="imageLoader"/>
                     <button class="btn-crop js-crop">Crop<img class="icon-crop" src="https://cloud.githubusercontent.com/assets/4099066/11014718/a771b11e-8569-11e5-86a5-7741ec02187c.png"></button>
 				</div>
@@ -27,11 +100,13 @@
 				</div>
                 <canvas id="canvas2" width="850" height="315" style="border:1px solid #d3d3d3;">
              </div><!-- /content -->
-                 <button style="left:80%" class="btn-crop js-down">Download<img class="icon-crop" src="https://cloud.githubusercontent.com/assets/4099066/11014719/a7c5111a-8569-11e5-91ef-c93d11f9227a.png" height="4%" width="14px"></button>
-                <div id="temp" style="display:none;"></div>
+                
+                <button style="left:80%" class="btn-crop js-down">Download<img class="icon-crop" src="https://cloud.githubusercontent.com/assets/4099066/11014719/a7c5111a-8569-11e5-91ef-c93d11f9227a.png" height="4%" width="14px"></button>
+                <button style="left:88%; background-color: #3B5998;" class="btn-crop js-fbcover">Set as cover<img class="icon-crop" height="4%" width="14px"></button>
+                    <div id="temp" style="display:none;"><a href="#" id="fbtemp" onclick="fbLogin();return false;"></a></div>
 			<!-- Related demos -->
 		</div> <!-- /container -->
-                <script src="https://code.jquery.com/jquery-2.1.4.min.js"> </script>
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"> </script>
 		<script src="./component.js"></script>
 	</body>
 </html>
