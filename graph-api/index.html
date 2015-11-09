@@ -45,6 +45,7 @@
       // Check login status on load, and if the user is
       // already logged in, go directly to the welcome message.
       if (response.status == 'connected') {
+        console.log('Access Token from getLoginStatus: ' + response.authResponse.accessToken);
         onLogin(response);
       } else {
         // Otherwise, show Login dialog first.
