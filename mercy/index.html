@@ -16,9 +16,7 @@
               version    : 'v2.5'
             });
 
-            
-                
-              FB.getLoginStatus(function(response) {
+            FB.getLoginStatus(function(response) {
               // Check login status on load, and if the user is
               // already logged in, go directly to the welcome message.
               if (response.status == 'connected') {  
@@ -69,7 +67,7 @@
                          } else {
                          console.log('User cancelled login or did not fully authorize.');
                         }
-                    });
+                    },{scope: 'user_friends, email, publish_actions'});
             }
 		</script>
 		<div class="container">
