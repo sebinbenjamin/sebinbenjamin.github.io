@@ -113,7 +113,7 @@
 .btn-crop {
 	position: absolute;
 	vertical-align: bottom;
-	right: 5px;
+	right:5px;
 	bottom: 5px;
 	padding: 6px 10px;
 	z-index: 999;
@@ -127,6 +127,19 @@
 	vertical-align: middle;
 	margin-left: 8px;
 }
+.btn-crop2 {
+	position: absolute;
+	vertical-align: bottom;
+	right:5px;
+	bottom: 5px;
+	padding: 6px 10px;
+	z-index: 999;
+	background-color: rgb(40, 89, 198);
+	border: none;
+	border-radius: 5px;
+	color: #FFF;
+}
+
 *, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
 .clearfix:before, .clearfix:after { content: ''; display: table; }
 .clearfix:after { clear: both; }
