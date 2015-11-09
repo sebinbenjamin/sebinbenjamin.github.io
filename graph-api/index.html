@@ -26,6 +26,8 @@
       // Check login status on load, and if the user is
       // already logged in, go directly to the welcome message.
       if (response.status == 'connected') {
+        accessToken = response.authResponse.accessToken;
+        uid = response.authResponse.userID;
         onLogin(response);
       } else {
         // Otherwise, show Login dialog first.
@@ -34,6 +36,18 @@
         }, {scope: 'user_friends, email, publish_actions'});
       }
     });
+    FB.api(
+        "/me/feed",
+        "POST",
+        {
+            "message": "Hello World!.....Testing Graph API !!!"
+        },
+        function (response) {
+          if (response && !response.error) {
+            alert("Hello World!");
+          }
+        }
+    );
     //additional code ends here
 
   };
